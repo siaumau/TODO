@@ -1,0 +1,203 @@
+:root {
+    --primary-color: #FF6B6B;
+    --text-color: #2D3436;
+    --bg-color: #0a0430;
+    --white: #FFFFFF;
+    --gray-light: #F1F2F6;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    color: var(--text-color);
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+h1::after {
+    content: "📝";
+    font-size: 1.5rem;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 2rem;
+    padding: 12px;
+    background: var(--gray-light);
+    border-radius: 8px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #636E72;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+#complete-count {
+    color: var(--primary-color);
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid var(--gray-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255,107,107,0.1);
+}
+
+button.add-btn {
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button.add-btn:hover {
+    background-color: #FF5252;
+    transform: translateY(-1px);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 16px;
+    background: var(--white);
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid var(--gray-light);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    cursor: grab;
+    user-select: none;
+}
+
+li:hover {
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+li.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.drag-handle {
+    color: #A4B0BE;
+    cursor: grab;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0 4px;
+}
+
+li.dragging .drag-handle {
+    cursor: grabbing;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray-light);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox.checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox.checked::after {
+    content: "✓";
+    color: var(--white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+}
+
+.todo-text {
+    flex: 1;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+li.completed .todo-text {
+    text-decoration: line-through;
+    color: #A4B0BE;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: #A4B0BE;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}

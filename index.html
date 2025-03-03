@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待辦事項 - PWA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>待辦事項</h1>
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label">未完成</span>
+                <span class="stat-value" id="incomplete-count">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">已完成</span>
+                <span class="stat-value" id="complete-count">0</span>
+            </div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="todo-input" placeholder="輸入待辦事項...">
+            <button class="add-btn" onclick="addTodo()">新增</button>
+        </div>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log("✅ Service Worker 註冊成功"))
+                .catch(err => console.log("❌ Service Worker 註冊失敗", err));
+        }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDInHVXYXea_3VFDvD4eB1yf5EhvhVFq7U",
+          authDomain: "first-ef141.firebaseapp.com",
+          projectId: "first-ef141",
+          storageBucket: "first-ef141.firebasestorage.app",
+          messagingSenderId: "1083533684990",
+          appId: "1:1083533684990:web:ebc5a0ead791d565eb75af"
+        };
+
+// 初始化 Firebase
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
+
+// 🔔 要求推播權限
+function requestNotificationPermission() {
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+            console.log("🔔 推播權限已允許！");
+            getFCMToken();
+        } else {
+            console.log("⚠️ 推播權限被拒絕！");
+        }
+    });
+}
+
+// 🔑 獲取 FCM Token
+function getFCMToken() {
+    messaging.getToken({ vapidKey: "你的 VAPID Key" }).then(token => {
+        console.log("📲 FCM Token:", token);
+        // 這裡可以將 Token 發送到你的伺服器 (如果有後端)
+    }).catch(err => console.log("❌ 獲取 Token 失敗:", err));
+}
+
+// 📩 監聽推播訊息 (前台接收)
+messaging.onMessage(payload => {
+    console.log("📩 收到推播:", payload);
+    new Notification(payload.notification.title, {
+        body: payload.notification.body,
+        icon: "icon-192.png"
+    });
+});
+      </script>
+</body>
+</html>
