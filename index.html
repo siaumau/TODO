@@ -23,10 +23,14 @@
         </div>
         <div class="input-container">
             <input type="text" id="todo-input" placeholder="輸入待辦事項...">
-            <button class="add-btn" onclick="addTodo()">新增</button>
+            <button class="add-btn" onclick="addTodo()">新增0</button>
         </div>
         <ul id="todo-list"></ul>
     </div>
+
+
+    <button onclick="requestNotificationPermission()">🔔 訂閱推播</button>
+
 
     <script>
         if ('serviceWorker' in navigator) {
@@ -45,12 +49,12 @@
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyDInHVXYXea_3VFDvD4eB1yf5EhvhVFq7U",
-          authDomain: "first-ef141.firebaseapp.com",
-          projectId: "first-ef141",
-          storageBucket: "first-ef141.firebasestorage.app",
-          messagingSenderId: "1083533684990",
-          appId: "1:1083533684990:web:ebc5a0ead791d565eb75af"
+apiKey: "AIzaSyDInHVXYXea_3VFDvD4eB1yf5EhvhVFq7U",
+authDomain: "first-ef141.firebaseapp.com",
+projectId: "first-ef141",
+storageBucket: "first-ef141.firebasestorage.app",
+messagingSenderId: "1083533684990",
+appId: "1:1083533684990:web:ebc5a0ead791d565eb75af"
         };
 
 // 初始化 Firebase
@@ -71,7 +75,7 @@ function requestNotificationPermission() {
 
 // 🔑 獲取 FCM Token
 function getFCMToken() {
-    messaging.getToken({ vapidKey: "你的 VAPID Key" }).then(token => {
+    messaging.getToken({ vapidKey: "BMS4SZBRufdwbGdSqC8SJzY_jqzF-lcV6HXfV6BWpVfj_7W9S5NBocMD0dVLefnmUWSconR1PSe0icrfU2iZ8sI" }).then(token => {
         console.log("📲 FCM Token:", token);
         // 這裡可以將 Token 發送到你的伺服器 (如果有後端)
     }).catch(err => console.log("❌ 獲取 Token 失敗:", err));
@@ -85,6 +89,7 @@ messaging.onMessage(payload => {
         icon: "icon-192.png"
     });
 });
+
       </script>
 </body>
 </html>

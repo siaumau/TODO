@@ -1,3 +1,5 @@
+importScripts('/firebase-messaging-sw.js');
+
 const CACHE_NAME = "todo-pwa-cache";
 const FILES_TO_CACHE = [
     "/",
